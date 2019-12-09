@@ -9,7 +9,7 @@ public class Main{
     public static void main(String[] args){
 
         LineIterator iter1 = new LineIterator();
-        String fileName = "present_instr_v5.asm";
+        String fileName = "test_instr.asm";
         FileReader fReader = getFileReader(fileName);
         Scanner scanner = new Scanner(fReader);
         while(scanner.hasNextLine()) {
@@ -22,7 +22,7 @@ public class Main{
         scanner.close();
 
         LineIterator iter2 = new LineIterator();
-        fileName = "present_data_v5.asm";
+        fileName = "test_data.asm";
         fReader = getFileReader(fileName);
         scanner = new Scanner(fReader);
         while(scanner.hasNextLine()) {
