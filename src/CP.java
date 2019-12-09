@@ -1,27 +1,27 @@
-public class CP implements Operator {
+public class CP implements LogicOperator {
     private int numA;
     private int numB;
 
     public CP() {
     }
 
-    private int getNumA() {
+    public int getNumA() {
         return this.numA;
     }
 
-    private int getNumB() {
+    public int getNumB() {
         return this.numB;
     }
 
-    private void setNumA(int numA) {
+    public void setNumA(int numA) {
         this.numA = numA;
     }
 
-    private void setNumB(int numB) {
+    public void setNumB(int numB) {
         this.numB = numB;
     }
 
-    private int solve() {
+    public int solve() {
         return numB;
     }
 }

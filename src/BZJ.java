@@ -1,27 +1,27 @@
-public class BZJ implements Operator {
+public class BZJ implements PCOperator {
     private int numA;
     private int numB;
 
     public BZJ() {
     }
 
-    private int getNumA() {
+    public int getNumA() {
         return this.numA;
     }
 
-    private int getNumB() {
+    public int getNumB() {
         return this.numB;
     }
 
-    private void setNumA(int numA) {
+    public void setNumA(int numA) {
         this.numA = numA;
     }
 
-    private void setNumB(int numB) {
+    public void setNumB(int numB) {
         this.numB = numB;
     }
 
-    private int solve(boolean immediate, int pCounter) {
+    public int solve(boolean immediate, int pCounter) {
         return (immediate) ? (numA + numB):((numB == 0) ? numA: pCounter+1);
     }
 }
