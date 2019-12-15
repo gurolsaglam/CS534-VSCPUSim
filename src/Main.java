@@ -4,32 +4,29 @@ import java.io.FileReader;
 import java.net.URL;
 import java.util.Scanner;
 
-public class Main{
+public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         LineIterator iter1 = new LineIterator();
-        String fileName = "test_instr.asm";
-        FileReader fReader = getFileReader(fileName);
-        Scanner scanner = new Scanner(fReader);
-        while(scanner.hasNextLine()) {
-            String line = scanner.nextLine(); //TODO clean the comments out (check if there is tab or multiple spaces and convert to only one space)
-            //System.out.println(line); //prints whole line
+        Scanner scanner = scannerCreator("test_instr.asm");
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String usableLine = regulateString(line);
             //System.out.println(line.split(" ", 2)[0]); //prints the address of the instr or data
             //System.out.println(line.split(" ", 2)[1]); //prints the instr or data
-            iter1.add(line);
+            iter1.add(usableLine);
         }
         scanner.close();
 
         LineIterator iter2 = new LineIterator();
-        fileName = "test_data.asm";
-        fReader = getFileReader(fileName);
-        scanner = new Scanner(fReader);
-        while(scanner.hasNextLine()) {
-            String line = scanner.nextLine(); //TODO clean the comments out (check if there is tab or multiple spaces and convert to only one space)
-            iter2.add(line);
+        Scanner scanner2 = scannerCreator("test_data.asm");
+        while (scanner2.hasNextLine()) {
+            String line = scanner2.nextLine();
+            String usableLine = regulateString(line);
+            iter2.add(usableLine);
         }
-        scanner.close();
+        scanner2.close();
 
         //TODO simulation part
         /*scanner = new Scanner(System.in);
@@ -55,5 +52,18 @@ public class Main{
             System.exit(1);
         }
         return fReader;
+    }
+
+    private static String regulateString(String str) {
+        str = str.split("//")[0];
+        str = str.trim().replaceAll("\t", " ");
+        str = str.trim().replaceAll(" +", " ");
+        return str;
+    }
+    private static Scanner scannerCreator(String str){
+        String fileName = str;
+        FileReader fReader = getFileReader(fileName);
+        Scanner scanner = new Scanner(fReader);
+        return scanner;
     }
 }
