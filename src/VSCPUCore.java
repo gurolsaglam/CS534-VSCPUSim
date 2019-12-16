@@ -33,10 +33,6 @@ public class VSCPUCore {
         return this.pCounter;
     }
 
-    public void setpCounter(final int pCounter) {
-        this.pCounter = pCounter;
-    }
-
     public int parseInstruction(Instruction instruction) { //TODO change state
         this.opCode = instruction.getOpCode();
         this.addressA = instruction.getAddressA();
@@ -60,38 +56,46 @@ public class VSCPUCore {
     }
 
     public int[] execute(int data) { //TODO change state
+        //Returns a three element array.
+        //The first element is wrEn, can be 1 or 0.
+        //The second is the address for the RAM,
+        //the third is the data to be written.
         this.state = 0;
         this.num2 = data;
-        if (isJump(this.opCode)) {
-
-        }
-        if (this.opCode.equals("CPIi")) {
-
-        } else {
-
-        }
-        return new int[3];
-    }
-
-    /*public int[] doOperation(Instruction instruction) {
+        int pCounterNext = this.pCounter;
         int[] result = new int[3];
-        if (isJump(instruction)) {
-            result[0] = 1;
-            if (instruction.getOpCode() == "BZJi") {
-                result[1] = bzj.solve(true, pCounter);
+        if (isJump(this.opCode)) {
+            result[0] = 0;
+            result[1] = 0;
+            result[2] = 0;
+            bzj.setNumA(this.num1);
+            bzj.setNumB(this.num2);
+            if (this.opCode.equals("BZJi")) {
+                pCounterNext = bzj.solve(true, pCounter);
             } else {
-                result[1] = bzj.solve(false, pCounter);
+                pCounterNext = bzj.solve(false, pCounter);
             }
         } else {
-            result[0] = 0;
-            result[1] = 1; //TODO resolve what operation it is and resolve the writing address and the data
-            result[2] = 1;
+            pCounterNext = pCounter + 1;
+            result[0] = 1;
+            if (this.opCode.equals("CPIi")) {
+                result[1] = this.num1;
+            } else {
+                result[1] = this.addressA;
+            }
         }
+        //TODO resolve mediator to solve operation?
+        result[2] = 0;
+        if (this.pCounter == pCounterNext) { //Stop results, result = [0, MAX, MAX]
+            result[1] = Integer.MAX_VALUE;
+            result[2] = Integer.MAX_VALUE;
+        }
+        this.pCounter = pCounterNext;
         return result;
-    }*/
+    }
 
     private boolean isJump(String opCode) {
-        if (opCode == "BZJ" || opCode == "BZJi") {
+        if (opCode.equals("BZJ") || opCode.equals("BZJi")) { //TODO ugly code
             return true;
         }
         return false;

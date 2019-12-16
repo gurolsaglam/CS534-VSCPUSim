@@ -19,27 +19,26 @@ public class VSCPU {
     }
 
     private void simulateAll() {
-        int pCounter = this.vscpuCore.getpCounter();
-        Instruction instruction = (Instruction) this.rom.getFrom(pCounter);
+        //Todo print a starting string?
+        while (true) {
+            int pCounter = this.vscpuCore.getpCounter();
+            Instruction instruction = (Instruction) this.rom.getFrom(pCounter);
 
-        int address = this.vscpuCore.parseInstruction(instruction);
-        int data = (int) this.ram.getFrom(address);
+            int address = this.vscpuCore.parseInstruction(instruction);
+            int data = (int) this.ram.getFrom(address);
 
-        address = vscpuCore.writeDataAndSendNextAddress(data);
-        data = (int) this.ram.getFrom(address);
+            address = vscpuCore.writeDataAndSendNextAddress(data);
+            data = (int) this.ram.getFrom(address);
 
-        int[] result = vscpuCore.execute(data);
-        this.ram.setData(result[0], result[1], result[2]);
+            int[] result = vscpuCore.execute(data);
+            this.ram.setData(result[0], result[1], result[2]);
 
-        /*int[] result = vscpuCore.doOperation(instruction);
-        if (result[0] == 1) {
-            vscpuCore.setpCounter(result[1]);
-        } else {
-            ram.setData(result[1], result[2]);
-            vscpuCore.setpCounter(pCounter + 1);
-        }*/
-
-        System.out.println("simulate all code.");
+            if (result[0] == 0 && result[1] == Integer.MAX_VALUE && result[2] == Integer.MAX_VALUE) {
+                System.out.println("The simulation has finished.");
+                break;
+            }
+            System.out.println("simulate all code."); //TODO print initial memory and final memory?
+        }
     }
 
     private void simulateLine() {
