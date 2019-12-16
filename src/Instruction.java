@@ -20,4 +20,13 @@ public class Instruction {
     public int getAddressB() {
         return this.addressB;
     }
+
+    @Override
+    public String toString() {
+        return "Instruction{" +
+                "opCode='" + opCode + '\'' +
+                ", addressA=" + addressA +
+                ", addressB=" + addressB +
+                '}';
+    }
 }
