@@ -19,15 +19,25 @@ public class VSCPU {
     }
 
     private void simulateAll() {
-        int pCounter = vscpuCore.getpCounter(); //TODO change state in the core
-        Instruction instruction = (Instruction) rom.getFrom(pCounter);
-        int[] result = vscpuCore.doOperation(instruction);
+        int pCounter = this.vscpuCore.getpCounter();
+        Instruction instruction = (Instruction) this.rom.getFrom(pCounter);
+
+        int address = this.vscpuCore.parseInstruction(instruction);
+        int data = (int) this.ram.getFrom(address);
+
+        address = vscpuCore.writeDataAndSendNextAddress(data);
+        data = (int) this.ram.getFrom(address);
+
+        int[] result = vscpuCore.execute(data);
+        this.ram.setData(result[0], result[1], result[2]);
+
+        /*int[] result = vscpuCore.doOperation(instruction);
         if (result[0] == 1) {
             vscpuCore.setpCounter(result[1]);
         } else {
             ram.setData(result[1], result[2]);
             vscpuCore.setpCounter(pCounter + 1);
-        }
+        }*/
 
         System.out.println("simulate all code.");
     }

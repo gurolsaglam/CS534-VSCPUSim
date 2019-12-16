@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         LineIterator iter1 = new LineIterator();
-        Scanner scanner = getScanner("test_instr.asm");
+        Scanner scanner = getScannerToReadFile("test_instr.asm");
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String usableLine = deleteCommentsAndFixSpaces(line);
@@ -20,7 +20,7 @@ public class Main {
         scanner.close();
 
         LineIterator iter2 = new LineIterator();
-        Scanner scanner2 = getScanner("test_data.asm");
+        Scanner scanner2 = getScannerToReadFile("test_data.asm");
         while (scanner2.hasNextLine()) {
             String line = scanner2.nextLine();
             String usableLine = deleteCommentsAndFixSpaces(line);
@@ -29,13 +29,20 @@ public class Main {
         scanner2.close();
 
         //TODO simulation part
-        /*scanner = new Scanner(System.in);
+        Scanner scanner3 = new Scanner(System.in);
         System.out.println("Enter sim type: ");
-        int c = scanner.nextInt();
-        scanner.close();*/
+        int c = scanner3.nextInt();
+        scanner3.close();
 
         VSCPU vscpu = new VSCPU(iter1, iter2);
-        vscpu.simulate(0); //simulate all = 0, simulate line = 1
+        vscpu.simulate(c); //simulate all = 0, simulate line = 1
+    }
+
+    private static Scanner getScannerToReadFile(String str){
+        String fileName = str;
+        FileReader fReader = getFileReader(fileName);
+        Scanner scanner = new Scanner(fReader);
+        return scanner;
     }
 
     private static FileReader getFileReader(String fileName) {
@@ -59,11 +66,5 @@ public class Main {
         str = str.trim().replaceAll("\t", " ");
         str = str.trim().replaceAll(" +", " ");
         return str;
-    }
-    private static Scanner getScanner(String str){
-        String fileName = str;
-        FileReader fReader = getFileReader(fileName);
-        Scanner scanner = new Scanner(fReader);
-        return scanner;
     }
 }

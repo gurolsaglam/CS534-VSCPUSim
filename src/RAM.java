@@ -29,7 +29,9 @@ public class RAM implements Memory{
         return memory.get(address);
     }
 
-    public void setData(int address, int data) {
-        memory.set(address, data);
+    public void setData(int wrEn, int address, int data) {
+        if (wrEn != 0) {
+            memory.set(address, data);
+        }
     }
 }

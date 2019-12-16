@@ -13,11 +13,11 @@ public class Instruction {
         return this.opCode;
     }
 
-    private int getAddressA() {
+    public int getAddressA() {
         return this.addressA;
     }
 
-    private int getAddressB() {
+    public int getAddressB() {
         return this.addressB;
     }
 }
