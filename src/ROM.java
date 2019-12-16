@@ -1,24 +1,27 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ROM{
-    private ArrayList<Instruction> memory;
-    private ArrayList<Instruction> opCodeList;
+    private final ArrayList<Instruction> memory;
+    private final ArrayList<Instruction> opCodeList;
 
-    public ROM(final Iterator iter) {
-        memory = new ArrayList<Instruction>();
-        opCodeList = new ArrayList<Instruction>();
-        while (iter.hasNext()) {
-            memory.add((Instruction) iter.next());//TODO change this because iter will provide the "line" in asm file
+    public ROM(final LineIterator iterator) {
+        this.memory = new ArrayList<Instruction>();
+        this.opCodeList = new ArrayList<Instruction>();
+        while (iterator.hasNext()) {
+            String temp = (String) iterator.next();
+            String[] temp2 = temp.split(" ");
+            String opCode = temp2[0];
+            int addressA = Integer.parseInt(temp2[1]);
+            int addressB = Integer.parseInt(temp2[2]);
+            this.memory.add(new Instruction(opCode, addressA, addressB));
         }
-        for(int i = 0; i < memory.size(); i++){
+        for(int i = 0; i < this.memory.size(); i++){
             for(int j = 0; j < i; j++){
-                if(memory.get(j) == memory.get(i)){
+                if(this.memory.get(j) == memory.get(i)){
                     System.out.println("This opCode already exists.");
                 }
             }
-            opCodeList.add(memory.get(i));
-
+            this.opCodeList.add(this.memory.get(i));
         }
     }
 

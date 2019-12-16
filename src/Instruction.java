@@ -3,7 +3,13 @@ public class Instruction {
     private int addressA;
     private int addressB;
 
-    private String getOpCode() {
+    public Instruction(String opCode, int addressA, int addressB) {
+        this.opCode = opCode;
+        this.addressA = addressA;
+        this.addressB = addressB;
+    }
+
+    String getOpCode() {
         return this.opCode;
     }
 

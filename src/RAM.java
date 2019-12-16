@@ -1,13 +1,12 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class RAM implements Memory{
     private ArrayList<Integer> memory;
 
-    public RAM(final Iterator iter) {
+    public RAM(final LineIterator iterator) {
         memory = new ArrayList<Integer>();
-        while (iter.hasNext()) {
-            memory.add((Integer) iter.next());//TODO change this because iter will provide the "line" in asm file
+        while (iterator.hasNext()) {
+            memory.add((Integer) iterator.next());//TODO change this because iter will provide the "line" in asm file
         }
     }
 

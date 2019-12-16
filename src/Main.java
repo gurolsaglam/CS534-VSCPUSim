@@ -9,10 +9,10 @@ public class Main {
     public static void main(String[] args) {
 
         LineIterator iter1 = new LineIterator();
-        Scanner scanner = scannerCreator("test_instr.asm");
+        Scanner scanner = getScanner("test_instr.asm");
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            String usableLine = regulateString(line);
+            String usableLine = deleteCommentsAndFixSpaces(line);
             //System.out.println(line.split(" ", 2)[0]); //prints the address of the instr or data
             //System.out.println(line.split(" ", 2)[1]); //prints the instr or data
             iter1.add(usableLine);
@@ -20,10 +20,10 @@ public class Main {
         scanner.close();
 
         LineIterator iter2 = new LineIterator();
-        Scanner scanner2 = scannerCreator("test_data.asm");
+        Scanner scanner2 = getScanner("test_data.asm");
         while (scanner2.hasNextLine()) {
             String line = scanner2.nextLine();
-            String usableLine = regulateString(line);
+            String usableLine = deleteCommentsAndFixSpaces(line);
             iter2.add(usableLine);
         }
         scanner2.close();
@@ -34,8 +34,8 @@ public class Main {
         int c = scanner.nextInt();
         scanner.close();*/
 
-        /*VSCPU vscpu = new VSCPU(iter1, iter2);
-        VSCPU.simulate(0); //simulate all = 0, simulate line = 1*/
+        VSCPU vscpu = new VSCPU(iter1, iter2);
+        vscpu.simulate(0); //simulate all = 0, simulate line = 1
     }
 
     private static FileReader getFileReader(String fileName) {
@@ -54,13 +54,13 @@ public class Main {
         return fReader;
     }
 
-    private static String regulateString(String str) {
+    private static String deleteCommentsAndFixSpaces(String str) {
         str = str.split("//")[0];
         str = str.trim().replaceAll("\t", " ");
         str = str.trim().replaceAll(" +", " ");
         return str;
     }
-    private static Scanner scannerCreator(String str){
+    private static Scanner getScanner(String str){
         String fileName = str;
         FileReader fReader = getFileReader(fileName);
         Scanner scanner = new Scanner(fReader);

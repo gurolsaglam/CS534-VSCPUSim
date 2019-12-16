@@ -11,7 +11,7 @@ public class VSCPU {
         vscpuCore = new VSCPUCore(); //TODO find a way to give opcodes to initialize operators
     }
 
-    public static void simulate(int type) {
+    public void simulate(int type) {
         if (type == 0) {
             simulateAll();
         } else {
@@ -19,11 +19,21 @@ public class VSCPU {
         }
     }
 
-    private static void simulateAll() {
+    private void simulateAll() {
+        int pCounter = vscpuCore.getpCounter(); //TODO change state in the core
+        Instruction instruction = (Instruction) rom.getFrom(pCounter);
+        int[] result = vscpuCore.doOperation(instruction);
+        if (result[0] == 1) {
+            vscpuCore.setpCounter(result[1]);
+        } else {
+            ram.setData(result[1], result[2]);
+            vscpuCore.setpCounter(pCounter + 1);
+        }
+
         System.out.println("simulate all code.");
     }
 
-    private static void simulateLine() {
+    private void simulateLine() {
         System.out.println("simulate one line.");
     }
 
