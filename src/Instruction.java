@@ -1,17 +1,23 @@
 public class Instruction {
-    private String opCode; //TODO: could be made enum
-    private int addressA;
-    private int addressB;
+    private final String opCode; //TODO: could be made enum
+    private final int addressA;
+    private final int addressB;
 
-    private String getOpCode() {
+    public Instruction(String opCode, int addressA, int addressB) {
+        this.opCode = opCode;
+        this.addressA = addressA;
+        this.addressB = addressB;
+    }
+
+    final String getOpCode() {
         return this.opCode;
     }
 
-    private int getAddressA() {
+    public int getAddressA() {
         return this.addressA;
     }
 
-    private int getAddressB() {
+    public int getAddressB() {
         return this.addressB;
     }
 }

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-
+//ITERATOR PATTERN
 public class LineIterator implements Iterator {
     private ArrayList<Object> objects;
     private int index = 0;

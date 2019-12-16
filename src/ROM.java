@@ -1,44 +1,51 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ROM {
-    private ArrayList<Instruction> memory;
-    private ArrayList<Instruction> opCodeList;
+public class ROM{
+    private final ArrayList<Instruction> memory;
+    private final ArrayList<String> opCodeList; //TODO maybe enum?
 
-        public ROM(final Iterator iter) {
-            memory = new ArrayList<Instruction>();
-            opCodeList = new ArrayList<Instruction>();
-            while (iter.hasNext()) {
-                memory.add((Instruction) iter.next());//TODO change this because iter will provide the "line" in asm file
-            }
-            opCodeList = orderOpCodes(opCodeList);
-        }
-        public Object getFrom(int address) {
-            return memory.get(address);
-        }
-
-        private ArrayList<Instruction> orderOpCodes(ArrayList<Instruction> list) {
-
-            for (int i = 0; i < memory.size(); i++) {
-                for (int j = 0; j < i; j++) {
-                    if (memory.get(j) == memory.get(i)) {
-                        System.out.println("This opCode already exists.");
-                    }
-                }
-                list.add(memory.get(i));
-
-            }
-        return list;
-        }
-
-        private ArrayList<Instruction> getOpCodeList () {
-            return opCodeList;
-        }
-        //TODO getOPcodes
-
-        private int getOpCodeListLength(){
-            return opCodeList.size();
-        }
-
+    public ROM(final LineIterator iterator) {
+        this.memory = new ArrayList<Instruction>();
+        this.opCodeList = new ArrayList<String>();
+        this.initializeMemory(iterator);
+        this.initializeOpCodeList();
     }
 
+    //BUILDER PATTERN
+    private void initializeMemory(LineIterator iterator) {
+        while (iterator.hasNext()) {
+            String[] temp = ((String) iterator.next()).split(" ");
+            int address = Integer.parseInt(temp[0].split(":")[0]);
+            String opCode = temp[1];
+            int addressA = Integer.parseInt(temp[2]);
+            int addressB = Integer.parseInt(temp[3]);
+            if (this.memory.size() <= address) {
+                for (int i = this.memory.size(); i < address; i++) {
+                    this.memory.add(null); //TODO NullObject inherited from Instruction?
+                }
+                this.memory.add(new Instruction(opCode, addressA, addressB));
+            } else {
+                this.memory.set(address, new Instruction(opCode, addressA, addressB));
+            }
+        }
+    }
+
+    private void initializeOpCodeList() {
+        for (Instruction instruction : this.memory) {
+            String opCode = instruction.getOpCode();
+            if (!this.opCodeList.contains(opCode)) {
+                this.opCodeList.add(opCode);
+            }
+        }
+    }
+
+    public Object getFrom(int address) {
+        return memory.get(address);
+    }
+
+
+    public ArrayList<String> getOpCodeList(){
+        return opCodeList;
+    }
+}
