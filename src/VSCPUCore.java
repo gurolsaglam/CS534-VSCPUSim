@@ -11,7 +11,7 @@ public class VSCPUCore {
     private int pCounter = 0;
 
     public VSCPUCore() {
-        add = new ADD();
+        add = new ADD(); //TODO make these proxies and let them initialize actual operations during simulation
         nand = new NAND();
         srl = new SRL();
         lt = new LT();

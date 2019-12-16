@@ -1,7 +1,7 @@
 public class Instruction {
-    private String opCode; //TODO: could be made enum
-    private int addressA;
-    private int addressB;
+    private final String opCode; //TODO: could be made enum
+    private final int addressA;
+    private final int addressB;
 
     public Instruction(String opCode, int addressA, int addressB) {
         this.opCode = opCode;
@@ -9,7 +9,7 @@ public class Instruction {
         this.addressB = addressB;
     }
 
-    String getOpCode() {
+    final String getOpCode() {
         return this.opCode;
     }
 

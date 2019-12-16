@@ -5,8 +5,23 @@ public class RAM implements Memory{
 
     public RAM(final LineIterator iterator) {
         memory = new ArrayList<Integer>();
+        initializeMemory(iterator);
+    }
+
+    //BUILDER PATTERN
+    private void initializeMemory(LineIterator iterator) {
         while (iterator.hasNext()) {
-            memory.add((Integer) iterator.next());//TODO change this because iter will provide the "line" in asm file
+            String[] temp = ((String) iterator.next()).split(" ");
+            int address = Integer.parseInt(temp[0].split(":")[0]);
+            int data = Integer.parseInt(temp[1]);
+            if (this.memory.size() <= address) {
+                for (int i = this.memory.size(); i < address; i++) {
+                    this.memory.add(0); //TODO NullObject or just 0?
+                }
+                this.memory.add(data);
+            } else {
+                this.memory.set(address, data);
+            }
         }
     }
 

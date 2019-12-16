@@ -1,16 +1,15 @@
-import java.util.Iterator;
-
 public class VSCPU {
     private ROM rom;
     private RAM ram;
     private VSCPUCore vscpuCore;
 
-    public VSCPU(final Iterator iter1, final Iterator iter2) {
+    public VSCPU(LineIterator iter1, LineIterator iter2) {
         rom =  new ROM(iter1);
         ram = new RAM(iter2);
-        vscpuCore = new VSCPUCore(); //TODO find a way to give opcodes to initialize operators
+        vscpuCore = new VSCPUCore(); //TODO find a way to give opcodes to initialize operators or maybe Proxies will initialize operations anyway?
     }
 
+    //STRATEGY PATTERN IS HERE
     public void simulate(int type) {
         if (type == 0) {
             simulateAll();
