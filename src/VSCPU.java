@@ -18,7 +18,7 @@ public class VSCPU {
         }
     }
 
-    private void simulateAll() {
+    private void simulateAll() { //TODO return a string "memories" of simulation, and in simulate all, we need X amount of string returned to publish to gui? Or maybe allocate the JTextArea to this method but this removes M-V-C.
         //Todo print a starting string?
         while (true) {
             int pCounter = this.vscpuCore.getpCounter();
