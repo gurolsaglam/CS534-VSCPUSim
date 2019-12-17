@@ -25,13 +25,13 @@ public class RAM implements Memory{
         }
     }
 
-    public Object getFrom(int address) {
-        return memory.get(address);
+    public Object getFrom(long address) {
+        return memory.get((int) address);
     }
 
-    public void setData(int wrEn, int address, int data) {
+    public void setData(int wrEn, long address, int data) {
         if (wrEn != 0) {
-            memory.set(address, data);
+            memory.set((int) address, data);
         }
     }
 }

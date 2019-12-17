@@ -21,7 +21,7 @@ public class MUL implements LogicOperator {
         this.numB = numB;
     }
 
-    public int solve() {
-        return numA * numB;
+    public long solve() {
+        return (long)(numA * numB) & 0xffffffffl;
     }
 }

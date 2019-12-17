@@ -21,18 +21,17 @@ public class VSCPU {
     private void simulateAll() { //TODO return a string "memories" of simulation, and in simulate all, we need X amount of string returned to publish to gui? Or maybe allocate the JTextArea to this method but this removes M-V-C.
         //Todo print a starting string?
         while (true) {
-            int pCounter = this.vscpuCore.getpCounter();
+            long pCounter = this.vscpuCore.getpCounter();
             Instruction instruction = (Instruction) this.rom.getFrom(pCounter);
 
-            int address = this.vscpuCore.parseInstruction(instruction);
+            long address = this.vscpuCore.parseInstruction(instruction);
             int data = (int) this.ram.getFrom(address);
 
             address = vscpuCore.writeDataAndSendNextAddress(data);
             data = (int) this.ram.getFrom(address);
 
-            int[] result = vscpuCore.execute(data);
-            this.ram.setData(result[0], result[1], result[2]);
-
+            long[] result = vscpuCore.execute(data);
+            this.ram.setData((int) result[0], result[1], (int) result[2]);
             if (result[0] == 0 && result[1] == Integer.MAX_VALUE && result[2] == Integer.MAX_VALUE) {
                 System.out.println("The simulation has finished.");
                 break;
@@ -42,6 +41,18 @@ public class VSCPU {
     }
 
     private void simulateLine() {
+        long pCounter = this.vscpuCore.getpCounter();
+        Instruction instruction = (Instruction) this.rom.getFrom(pCounter);
+
+        long address = this.vscpuCore.parseInstruction(instruction);
+        int data = (int) this.ram.getFrom(address);
+
+        address = vscpuCore.writeDataAndSendNextAddress(data);
+        data = (int) this.ram.getFrom(address);
+
+        long[] result = vscpuCore.execute(data);
+        this.ram.setData((int) result[0], result[1], (int) result[2]);
+
         System.out.println("simulate one line.");
     }
 

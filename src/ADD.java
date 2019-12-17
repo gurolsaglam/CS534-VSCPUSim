@@ -21,7 +21,7 @@ public class ADD implements LogicOperator {
         this.numB = numB;
     }
 
-    public int solve() {
-        return numA + numB;
+    public long solve() {
+        return (long)(this.numA + this.numB) & 0xffffffffl;
     }
 }

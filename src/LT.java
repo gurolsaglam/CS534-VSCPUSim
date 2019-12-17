@@ -21,11 +21,11 @@ public class LT implements LogicOperator {
         this.numB = numB;
     }
 
-    public int solve() {
-        if (numA < numB) {
-            return 1;
+    public long solve() {
+        if ((this.numA & 0xffffffffl) < (this.numB & 0xffffffffl)) {
+            return 1L;
         } else {
-            return 0;
+            return 0L;
         }
     }
 }

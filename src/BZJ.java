@@ -21,7 +21,7 @@ public class BZJ implements PCOperator {
         this.numB = numB;
     }
 
-    public int solve(boolean immediate, int pCounter) {
-        return (immediate) ? (numA + numB):((numB == 0) ? numA: pCounter+1);
+    public long solve(boolean immediate, long pCounter) {
+        return (immediate) ? ((long)(this.numA + this.numB) & 0xffffffffl):((this.numB == 0) ? this.numA: (long)(pCounter+1) & 0xffffffffl);
     }
 }

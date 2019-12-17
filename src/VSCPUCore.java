@@ -13,12 +13,12 @@ public class VSCPUCore {
     private final State dataFetchSecondState;
     private final State executeState;
 
-    private int pCounter = 0;
+    private long pCounter = 0;
     private State state;
 
     private String opCode;
-    private int addressA;
-    private int addressB;
+    private long addressA;
+    private long addressB;
     private int num1;
     private int num2;
 
@@ -60,12 +60,12 @@ public class VSCPUCore {
         this.state = state;
     }
 
-    public int getpCounter() {
+    public long getpCounter() {
         this.state.fetchInstruction();
         return this.pCounter;
     }
 
-    public int parseInstruction(Instruction instruction) {
+    public long parseInstruction(Instruction instruction) {
         this.state.parseInstruction();
         this.opCode = instruction.getOpCode();
         this.addressA = instruction.getAddressA();
@@ -76,7 +76,7 @@ public class VSCPUCore {
         return this.addressA;
     }
 
-    public int writeDataAndSendNextAddress(int data) {
+    public long writeDataAndSendNextAddress(int data) {
         this.state.getSecondData();
         if (this.opCode.equals("CPI")) {
             this.num2 = data;
@@ -87,22 +87,22 @@ public class VSCPUCore {
         }
     }
 
-    public int[] execute(int data) { //TODO change state
+    public long[] execute(int data) { //TODO change state
         //Returns a three element array.
         //The first element is wrEn, can be 1 or 0.
         //The second is the address for the RAM,
         //the third is the data to be written.
         this.state.executeInstruction();
         this.num2 = data;
-        int pCounterNext = this.pCounter;
-        int[] result = new int[3];
+        long pCounterNext = this.pCounter;
+        long[] result = new long[3];
         if (this.isJump(this.opCode)) {
             result[0] = 0;
             result[1] = 0;
             result[2] = 0;
             if (this.opCode.equals("BZJi")) {
                 this.bzj.setNumA(this.num1);
-                this.bzj.setNumB(this.addressB);
+                this.bzj.setNumB((int) this.addressB);
                 pCounterNext = this.bzj.solve(true, pCounter);
             } else {
                 this.bzj.setNumA(this.num1);
@@ -125,7 +125,7 @@ public class VSCPUCore {
                 result[2] = this.add.solve();
             } else if (this.opCode.equals("ADDi")) {
                 this.add.setNumA(this.num1);
-                this.add.setNumB(this.addressB);
+                this.add.setNumB((int) this.addressB);
                 result[2] = this.add.solve();
             } else if (this.opCode.equals("NAND")) {
                 this.nand.setNumA(this.num1);
@@ -133,7 +133,7 @@ public class VSCPUCore {
                 result[2] = this.nand.solve();
             } else if (this.opCode.equals("NANDi")) {
                 this.nand.setNumA(this.num1);
-                this.nand.setNumB(this.addressB);
+                this.nand.setNumB((int) this.addressB);
                 result[2] = this.nand.solve();
             } else if (this.opCode.equals("SRL")) {
                 this.srl.setNumA(this.num1);
@@ -141,7 +141,7 @@ public class VSCPUCore {
                 result[2] = this.srl.solve();
             } else if (this.opCode.equals("SRLi")) {
                 this.srl.setNumA(this.num1);
-                this.srl.setNumB(this.addressB);
+                this.srl.setNumB((int) this.addressB);
                 result[2] = this.srl.solve();
             } else if (this.opCode.equals("LT")) {
                 this.lt.setNumA(this.num1);
@@ -149,7 +149,7 @@ public class VSCPUCore {
                 result[2] = this.lt.solve();
             } else if (this.opCode.equals("LTi")) {
                 this.lt.setNumA(this.num1);
-                this.lt.setNumB(this.addressB);
+                this.lt.setNumB((int) this.addressB);
                 result[2] = this.lt.solve();
             } else if (this.opCode.equals("CP")) {
                 this.cp.setNumA(this.num1);
@@ -157,7 +157,7 @@ public class VSCPUCore {
                 result[2] = this.cp.solve();
             } else if (this.opCode.equals("CPi")) {
                 this.cp.setNumA(this.num1);
-                this.cp.setNumB(this.addressB);
+                this.cp.setNumB((int) this.addressB);
                 result[2] = this.cp.solve();
             } else if (this.opCode.equals("CPI")) {
                 this.cpi.setNumA(this.num1);
@@ -173,7 +173,7 @@ public class VSCPUCore {
                 result[2] = this.mul.solve();
             } else if (this.opCode.equals("MULi")) {
                 this.mul.setNumA(this.num1);
-                this.mul.setNumB(this.addressB);
+                this.mul.setNumB((int) this.addressB);
                 result[2] = this.mul.solve();
             } else {
                 System.out.println("Unrecognized operation.");

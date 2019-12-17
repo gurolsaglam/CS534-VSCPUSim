@@ -40,8 +40,8 @@ public class ROM{
         }
     }
 
-    public Object getFrom(int address) {
-        return memory.get(address);
+    public Object getFrom(long address) {
+        return memory.get((int) address);
     }
 
 

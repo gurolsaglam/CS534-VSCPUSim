@@ -3,5 +3,5 @@ public interface LogicOperator extends Operator {
     public int getNumB();
     public void setNumA(int numA);
     public void setNumB(int numB);
-    public int solve();
+    public long solve();
 }

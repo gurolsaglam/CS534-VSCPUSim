@@ -21,7 +21,7 @@ public class CP implements LogicOperator {
         this.numB = numB;
     }
 
-    public int solve() {
-        return numB;
+    public long solve() {
+        return this.numB;
     }
 }

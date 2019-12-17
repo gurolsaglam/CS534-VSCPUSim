@@ -21,11 +21,11 @@ public class SRL implements LogicOperator {
         this.numB = numB;
     }
 
-    public int solve() {
-        if (numB < 32) {
-            return numA >>> numB;
+    public long solve() {
+        if (this.numB < 32) {
+            return (long) (this.numA >>> this.numB) & 0xffffffffl;
         } else {
-            return (numA << (numB - 32));
+            return (long)(this.numA << (this.numB - 32)) & 0xffffffffl;
         }
     } //signed shift << >>, unsigned shift <<< >>>
 }
