@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ROM{
     private final ArrayList<Instruction> memory;
@@ -41,7 +40,7 @@ public class ROM{
     }
 
     public Object getFrom(long address) {
-        return memory.get((int) address);
+        return this.memory.get((int) address);
     }
 
 

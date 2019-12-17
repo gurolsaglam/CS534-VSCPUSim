@@ -28,14 +28,18 @@ public class Main {
         }
         scanner2.close();
 
+        VSCPU vscpu = new VSCPU(iter1, iter2);
         //TODO simulation part
         Scanner scanner3 = new Scanner(System.in);
-        System.out.println("Enter sim type: ");
-        int c = scanner3.nextInt();
+        while (true) {
+            System.out.println("Enter sim type: ");
+            int c = scanner3.nextInt();
+            boolean isFinished = vscpu.simulate(c); //simulate all = 0, simulate line = 1
+            if (isFinished) {
+                break;
+            }
+        }
         scanner3.close();
-
-        VSCPU vscpu = new VSCPU(iter1, iter2);
-        vscpu.simulate(c); //simulate all = 0, simulate line = 1
     }
 
     private static Scanner getScannerToReadFile(String str){
