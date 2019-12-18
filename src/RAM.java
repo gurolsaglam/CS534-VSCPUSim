@@ -26,6 +26,11 @@ public class RAM implements Memory{
     }
 
     public Object getFrom(long address) {
+        if (this.memory.size() <= address) {
+            for (int i = this.memory.size(); i <= address; i++) {
+                this.memory.add(0);
+            }
+        }
         return memory.get((int) address);
     }
 

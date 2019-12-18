@@ -93,4 +93,8 @@ public class VSCPUCore {
         this.pCounter = pCounterNext;
         return result;
     }
+
+    protected boolean isJump() {
+        return this.operatorMediator.isJump(this.opCode);
+    }
 }

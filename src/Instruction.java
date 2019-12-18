@@ -21,10 +21,6 @@ public class Instruction extends InstrSet {
 
     @Override
     public String toString() {
-        return "Instruction{" +
-                "opCode='" + opCode + '\'' +
-                ", addressA=" + addressA +
-                ", addressB=" + addressB +
-                '}';
+        return this.opCode + " " + this.addressA + " " + this.addressB;
     }
 }

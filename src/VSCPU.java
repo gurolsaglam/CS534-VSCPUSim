@@ -43,13 +43,17 @@ public class VSCPU {
         data = (int) this.ram.getFrom(address2);
 
         //print memory before execution
-        System.out.println(this.getMemory(true, address1, address2));
+        if (!this.vscpuCore.isJump()) {
+            System.out.println(this.getMemory(true, address1, address2));
+        }
 
         long[] result = vscpuCore.execute(data);
         this.ram.setData((int) result[0], result[1], (int) result[2]);
 
         //print memory after execution
-        System.out.println(this.getMemory(false, address1, address2));
+        if (!this.vscpuCore.isJump()) {
+            System.out.println(this.getMemory(false, address1, address2));
+        }
 
         System.out.println(this.getStars());
 
@@ -69,7 +73,7 @@ public class VSCPU {
 
     private String getInstruction(long pCounter) {
         String result = "Program Counter\t: " + (int) pCounter + "\n";
-        result = result + ((Instruction) this.rom.getFrom(pCounter)).toString();
+        result = result + "Current instruction\t: " + ((Instruction) this.rom.getFrom(pCounter)).toString();
         return result;
     }
 

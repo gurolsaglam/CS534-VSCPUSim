@@ -112,7 +112,7 @@ public class OperatorMediator {
         return result;
     }
 
-    private boolean isJump(String opCode) {
+    protected boolean isJump(String opCode) {
         if (opCode.equals("BZJ") || opCode.equals("BZJi")) {
             return true;
         }

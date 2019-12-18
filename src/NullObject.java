@@ -2,21 +2,23 @@
 public class NullObject extends InstrSet {
 
     public NullObject(){
-        this.opCode = null;
+        this.opCode = "ADD";
+        this.addressA = 0;
+        this.addressB = 0;
     }
     public long getAddressA() {
-        return -1;
+        return this.addressA;
     }
 
     public long getAddressB() {
-        return -1;
+        return this.addressB;
     }
 
     public String toString() {
-        return  "null";
+        return  this.opCode + " " + this.addressA + " " + this.addressB;
     }
 
     public final String getOpCode() {
-        return "null";
+        return this.opCode;
     }
 }

@@ -21,7 +21,7 @@ public class ROM{
             int addressB = Integer.parseInt(temp[3]);
             if (this.memory.size() <= address) {
                 for (int i = this.memory.size(); i < address; i++) {
-                    this.memory.add(new NullObject()); //TODO NullObject inherited from Instruction?
+                    this.memory.add(new NullObject());
                 }
                 this.memory.add(new Instruction(opCode, addressA, addressB));
             } else {
@@ -40,6 +40,11 @@ public class ROM{
     }
 
     public Object getFrom(long address) {
+        if (this.memory.size() <= address) {
+            for (int i = this.memory.size(); i <= address; i++) {
+                this.memory.add(new NullObject());
+            }
+        }
         return this.memory.get((int) address);
     }
 
