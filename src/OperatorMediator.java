@@ -98,7 +98,7 @@ public class OperatorMediator {
                 this.mul = MUL.getInstance(this.num1, this.num2);
                 result[2] = this.mul.solve();
             } else if (this.opCode.equals("MULi")) {
-                this.mul = MUL.getInstance(this.num1, (int) this.addressB)
+                this.mul = MUL.getInstance(this.num1, (int) this.addressB);
                 result[2] = this.mul.solve();
             } else {
                 System.out.println("Unrecognized operation.");
