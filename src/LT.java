@@ -1,8 +1,16 @@
 public class LT implements LogicOperator {
+    private static LT lt = new LT();
+
     private int numA;
     private int numB;
 
-    public LT() {
+    private LT() {
+    }
+
+    public static LT getInstance(int numA, int numB) {
+        lt.setNumA(numA);
+        lt.setNumB(numB);
+        return lt;
     }
 
     public int getNumA() {
@@ -13,19 +21,19 @@ public class LT implements LogicOperator {
         return this.numB;
     }
 
-    public void setNumA(int numA) {
+    private void setNumA(int numA) {
         this.numA = numA;
     }
 
-    public void setNumB(int numB) {
+    private void setNumB(int numB) {
         this.numB = numB;
     }
 
-    public int solve() {
-        if (numA < numB) {
-            return 1;
+    public long solve() {
+        if ((this.numA & 0xffffffffl) < (this.numB & 0xffffffffl)) {
+            return 1L;
         } else {
-            return 0;
+            return 0L;
         }
     }
 }

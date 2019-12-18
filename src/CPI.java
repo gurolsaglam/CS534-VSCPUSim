@@ -1,8 +1,16 @@
 public class CPI implements LogicOperator {
+    private static CPI cpi = new CPI();
+
     private int numA;
     private int numB;
 
-    public CPI() {
+    private CPI() {
+    }
+
+    public static CPI getInstance(int numA, int numB) {
+        cpi.setNumA(numA);
+        cpi.setNumB(numB);
+        return cpi;
     }
 
     public int getNumA() {
@@ -13,15 +21,15 @@ public class CPI implements LogicOperator {
         return this.numB;
     }
 
-    public void setNumA(int numA) {
+    private void setNumA(int numA) {
         this.numA = numA;
     }
 
-    public void setNumB(int numB) {
+    private void setNumB(int numB) {
         this.numB = numB;
     }
 
-    public int solve() {
-        return numB;
+    public long solve() {
+        return this.numB;
     }
 }

@@ -1,8 +1,16 @@
 public class ADD implements LogicOperator {
+    private static ADD add = new ADD();
+
     private int numA;
     private int numB;
 
-    public ADD() {
+    private ADD() {
+    }
+
+    public static ADD getInstance(int numA, int numB) {
+        add.setNumA(numA);
+        add.setNumB(numB);
+        return add;
     }
 
     public int getNumA() {
@@ -13,15 +21,15 @@ public class ADD implements LogicOperator {
         return this.numB;
     }
 
-    public void setNumA(int numA) {
+    private void setNumA(int numA) {
         this.numA = numA;
     }
 
-    public void setNumB(int numB) {
+    private void setNumB(int numB) {
         this.numB = numB;
     }
 
-    public int solve() {
-        return numA + numB;
+    public long solve() {
+        return (long)(this.numA + this.numB) & 0xffffffffl;
     }
 }

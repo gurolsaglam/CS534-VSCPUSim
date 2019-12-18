@@ -16,7 +16,7 @@ public class RAM implements Memory{
             int data = Integer.parseInt(temp[1]);
             if (this.memory.size() <= address) {
                 for (int i = this.memory.size(); i < address; i++) {
-                    this.memory.add(0); //TODO NullObject or just 0?
+                    this.memory.add(0);
                 }
                 this.memory.add(data);
             } else {
@@ -25,13 +25,13 @@ public class RAM implements Memory{
         }
     }
 
-    public Object getFrom(int address) {
-        return memory.get(address);
+    public Object getFrom(long address) {
+        return memory.get((int) address);
     }
 
-    public void setData(int wrEn, int address, int data) {
+    public void setData(int wrEn, long address, int data) {
         if (wrEn != 0) {
-            memory.set(address, data);
+            memory.set((int) address, data);
         }
     }
 }
