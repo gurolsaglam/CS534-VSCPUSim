@@ -15,7 +15,7 @@ public class LineIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return ((objects.size() - index) != 0); //TODO change the logic for default arraylist size, size can be 10 and list can be empty
+        return ((objects.size() - index) != 0);
     }
 
     @Override
