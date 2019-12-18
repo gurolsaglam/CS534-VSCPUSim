@@ -1,4 +1,4 @@
-//NULL OBJECT PATTERN
+//NULL OBJECT PATTERN implemented
 public class NullObject extends InstrSet {
 
     public NullObject(){
