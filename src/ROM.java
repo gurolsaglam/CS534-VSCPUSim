@@ -1,11 +1,19 @@
 import java.util.ArrayList;
 
 public class ROM{
+    private static ROM rom = null;
     private final ArrayList<InstrSet> memory;
 
-    public ROM(final LineIterator iterator) {
+    private ROM(final LineIterator iterator) {
         this.memory = new ArrayList<InstrSet>();
         this.initializeMemory(iterator);
+    }
+
+    public static ROM getInstance(LineIterator iterator) {
+        if (rom == null) {
+            rom = new ROM(iterator);
+        }
+        return rom;
     }
 
     //BUILDER PATTERN
@@ -19,9 +27,9 @@ public class ROM{
             if (this.memory.size() <= address) {
                 for (int i = this.memory.size(); i < address; i++) {
                     if (this.memory.get(0) == null) {
-                        this.memory.add(new NullObject("ADD"));
+                        this.memory.add(NullObject.getInstance("ADD"));
                     } else {
-                        this.memory.add(new NullObject(this.memory.get(0).getOpCode()));
+                        this.memory.add(NullObject.getInstance(this.memory.get(0).getOpCode()));
                     }
                 }
                 this.memory.add(new Instruction(opCode, addressA, addressB));
@@ -35,9 +43,9 @@ public class ROM{
         if (this.memory.size() <= address) {
             for (int i = this.memory.size(); i <= address; i++) {
                 if (this.memory.get(0) == null) {
-                    this.memory.add(new NullObject("ADD"));
+                    this.memory.add(NullObject.getInstance("ADD"));
                 } else {
-                    this.memory.add(new NullObject(this.memory.get(0).getOpCode()));
+                    this.memory.add(NullObject.getInstance(this.memory.get(0).getOpCode()));
                 }
             }
         }

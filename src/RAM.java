@@ -1,11 +1,19 @@
 import java.util.ArrayList;
 
 public class RAM implements Memory{
+    private static RAM ram = null;
     private ArrayList<Integer> memory;
 
-    public RAM(final LineIterator iterator) {
+    private RAM(final LineIterator iterator) {
         memory = new ArrayList<Integer>();
         initializeMemory(iterator);
+    }
+
+    public static RAM getInstance(LineIterator iterator) {
+        if (ram == null) {
+            ram = new RAM(iterator);
+        }
+        return ram;
     }
 
     //BUILDER PATTERN

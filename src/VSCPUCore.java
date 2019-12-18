@@ -1,4 +1,5 @@
 public class VSCPUCore {
+    private static VSCPUCore vscpuCore = new VSCPUCore();
     private OperatorMediator operatorMediator;
 
     private final State instructionFetchState;
@@ -15,14 +16,18 @@ public class VSCPUCore {
     private int num1;
     private int num2;
 
-    public VSCPUCore() {
+    private VSCPUCore() {
         this.operatorMediator = OperatorMediator.getInstance();
-        this.instructionFetchState = new InstructionFetchState(this);
-        this.dataFetchFirstState = new DataFetchFirstState(this);
-        this.dataFetchSecondState = new DataFetchSecondState(this);
-        this.executeState = new ExecuteState(this);
+        this.instructionFetchState = InstructionFetchState.getInstance(this);
+        this.dataFetchFirstState = DataFetchFirstState.getInstance(this);
+        this.dataFetchSecondState = DataFetchSecondState.getInstance(this);
+        this.executeState = ExecuteState.getInstance(this);
         this.state = this.instructionFetchState;
 
+    }
+
+    public static VSCPUCore getInstance() {
+        return vscpuCore;
     }
 
     protected State getInstructionFetchState() {

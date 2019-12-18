@@ -1,7 +1,15 @@
 public class DataFetchFirstState implements State {
+    private static DataFetchFirstState dataFetchFirstState = null;
     private VSCPUCore vscpuCore;
-    public DataFetchFirstState(VSCPUCore vscpuCore) {
+    private DataFetchFirstState(VSCPUCore vscpuCore) {
         this.vscpuCore = vscpuCore;
+    }
+
+    public static DataFetchFirstState getInstance(VSCPUCore vscpuCore) {
+        if (dataFetchFirstState == null) {
+            dataFetchFirstState = new DataFetchFirstState(vscpuCore);
+        }
+        return dataFetchFirstState;
     }
 
     @Override

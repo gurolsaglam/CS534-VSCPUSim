@@ -1,7 +1,15 @@
 public class ExecuteState implements State {
+    private static ExecuteState executeState = null;
     private VSCPUCore vscpuCore;
-    public ExecuteState(VSCPUCore vscpuCore) {
+    private ExecuteState(VSCPUCore vscpuCore) {
         this.vscpuCore = vscpuCore;
+    }
+
+    public static ExecuteState getInstance(VSCPUCore vscpuCore) {
+        if (executeState == null) {
+            executeState = new ExecuteState(vscpuCore);
+        }
+        return executeState;
     }
 
     @Override

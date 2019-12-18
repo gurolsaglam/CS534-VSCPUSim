@@ -1,7 +1,15 @@
 public class InstructionFetchState implements State{
+    private static InstructionFetchState instructionFetchState = null;
     private VSCPUCore vscpuCore;
-    public InstructionFetchState(VSCPUCore vscpuCore) {
+    private InstructionFetchState(VSCPUCore vscpuCore) {
         this.vscpuCore = vscpuCore;
+    }
+
+    public static InstructionFetchState getInstance(VSCPUCore vscpuCore) {
+        if (instructionFetchState == null) {
+            instructionFetchState = new InstructionFetchState(vscpuCore);
+        }
+        return instructionFetchState;
     }
 
     @Override

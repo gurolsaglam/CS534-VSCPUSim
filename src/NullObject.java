@@ -1,11 +1,18 @@
 //NULL OBJECT PATTERN implemented
 public class NullObject extends InstrSet {
+    private static NullObject nullObject = new NullObject();
 
-    public NullObject(String opCode){
-        this.opCode = opCode;
+    private NullObject(){
+        this.opCode = "";
         this.addressA = 0;
         this.addressB = 0;
     }
+
+    public static NullObject getInstance(String opCode) {
+        nullObject.setOpCode(opCode);
+        return nullObject;
+    }
+
     public long getAddressA() {
         return this.addressA;
     }
@@ -20,5 +27,9 @@ public class NullObject extends InstrSet {
 
     public final String getOpCode() {
         return this.opCode;
+    }
+
+    private void setOpCode(String opCode) {
+        this.opCode = opCode;
     }
 }

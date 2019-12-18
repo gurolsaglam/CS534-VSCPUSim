@@ -7,10 +7,10 @@ public class VSCPU {
     private MessageMediator messageMediator;
 
     public VSCPU(LineIterator iter1, LineIterator iter2, JComponent jComponent) {
-        rom =  new ROM(iter1);
-        ram = new RAM(iter2);
-        vscpuCore = new VSCPUCore();
-        messageMediator = new MessageMediator(jComponent);
+        rom =  ROM.getInstance(iter1);
+        ram = RAM.getInstance(iter2);
+        vscpuCore = VSCPUCore.getInstance();
+        messageMediator = MessageMediator.getInstance(jComponent);
     }
 
     //STRATEGY PATTERN IS HERE
