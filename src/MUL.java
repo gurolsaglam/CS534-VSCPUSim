@@ -1,8 +1,16 @@
 public class MUL implements LogicOperator {
+    private static MUL mul = new MUL();
+
     private int numA;
     private int numB;
 
-    public MUL() {
+    private MUL() {
+    }
+
+    public static MUL getInstance(int numA, int numB) {
+        mul.setNumA(numA);
+        mul.setNumB(numB);
+        return mul;
     }
 
     public int getNumA() {
@@ -13,11 +21,11 @@ public class MUL implements LogicOperator {
         return this.numB;
     }
 
-    public void setNumA(int numA) {
+    private void setNumA(int numA) {
         this.numA = numA;
     }
 
-    public void setNumB(int numB) {
+    private void setNumB(int numB) {
         this.numB = numB;
     }
 

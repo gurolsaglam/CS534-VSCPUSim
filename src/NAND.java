@@ -1,8 +1,16 @@
 public class NAND implements LogicOperator {
+    private static NAND nand = new NAND();
+
     private int numA;
     private int numB;
 
-    public NAND() {
+    private NAND() {
+    }
+
+    public static NAND getInstance(int numA, int numB) {
+        nand.setNumA(numA);
+        nand.setNumB(numB);
+        return nand;
     }
 
     public int getNumA() {
@@ -13,11 +21,11 @@ public class NAND implements LogicOperator {
         return this.numB;
     }
 
-    public void setNumA(int numA) {
+    private void setNumA(int numA) {
         this.numA = numA;
     }
 
-    public void setNumB(int numB) {
+    private void setNumB(int numB) {
         this.numB = numB;
     }
 

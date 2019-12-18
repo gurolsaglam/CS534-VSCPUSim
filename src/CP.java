@@ -1,8 +1,16 @@
 public class CP implements LogicOperator {
+    private static CP cp = new CP();
+
     private int numA;
     private int numB;
 
-    public CP() {
+    private CP() {
+    }
+
+    public static CP getInstance(int numA, int numB) {
+        cp.setNumA(numA);
+        cp.setNumB(numB);
+        return cp;
     }
 
     public int getNumA() {
@@ -13,11 +21,11 @@ public class CP implements LogicOperator {
         return this.numB;
     }
 
-    public void setNumA(int numA) {
+    private void setNumA(int numA) {
         this.numA = numA;
     }
 
-    public void setNumB(int numB) {
+    private void setNumB(int numB) {
         this.numB = numB;
     }
 

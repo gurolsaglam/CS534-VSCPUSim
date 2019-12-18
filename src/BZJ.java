@@ -1,8 +1,18 @@
+import java.util.Enumeration;
+
 public class BZJ implements PCOperator {
+    private static BZJ bzj = new BZJ();
+
     private int numA;
     private int numB;
 
-    public BZJ() {
+    private BZJ() {
+    }
+
+    public static BZJ getInstance(int numA, int numB) {
+        bzj.setNumA(numA);
+        bzj.setNumB(numB);
+        return bzj;
     }
 
     public int getNumA() {
@@ -13,11 +23,11 @@ public class BZJ implements PCOperator {
         return this.numB;
     }
 
-    public void setNumA(int numA) {
+    private void setNumA(int numA) {
         this.numA = numA;
     }
 
-    public void setNumB(int numB) {
+    private void setNumB(int numB) {
         this.numB = numB;
     }
 
