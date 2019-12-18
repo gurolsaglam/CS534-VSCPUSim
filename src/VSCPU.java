@@ -10,7 +10,7 @@ public class VSCPU {
     }
 
     //STRATEGY PATTERN IS HERE
-    public boolean simulate(int type) {
+    protected boolean simulate(int type) {
         if (type == 0) {
             return simulateAll();
         } else {

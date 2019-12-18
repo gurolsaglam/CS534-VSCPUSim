@@ -26,7 +26,7 @@ public class OperatorMediator {
         return operatorMediator;
     }
 
-    public boolean isCPI(String opCode) {
+    boolean isCPI(String opCode) {
         return opCode.equals("CPI");
     }
 

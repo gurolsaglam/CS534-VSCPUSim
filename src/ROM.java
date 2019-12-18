@@ -2,13 +2,10 @@ import java.util.ArrayList;
 
 public class ROM{
     private final ArrayList<InstrSet> memory;
-    private final ArrayList<String> opCodeList; //TODO maybe enum?
 
     public ROM(final LineIterator iterator) {
         this.memory = new ArrayList<InstrSet>();
-        this.opCodeList = new ArrayList<String>();
         this.initializeMemory(iterator);
-        this.initializeOpCodeList();
     }
 
     //BUILDER PATTERN
@@ -30,15 +27,6 @@ public class ROM{
         }
     }
 
-    private void initializeOpCodeList() {
-        for (InstrSet instruction : this.memory) {
-            String opCode = instruction.getOpCode();
-            if (!this.opCodeList.contains(opCode)) {
-                this.opCodeList.add(opCode);
-            }
-        }
-    }
-
     public Object getFrom(long address) {
         if (this.memory.size() <= address) {
             for (int i = this.memory.size(); i <= address; i++) {
@@ -46,10 +34,5 @@ public class ROM{
             }
         }
         return this.memory.get((int) address);
-    }
-
-
-    public ArrayList<String> getOpCodeList(){
-        return opCodeList;
     }
 }

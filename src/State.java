@@ -1,10 +1,10 @@
 //STATE PATTERN
 public interface State {
-    boolean fetchInstruction();
+    void fetchInstruction();
 
-    boolean parseInstruction();
+    void parseInstruction();
 
-    boolean getSecondData();
+    void getSecondData();
 
-    boolean executeInstruction();
+    void executeInstruction();
 }

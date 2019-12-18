@@ -5,23 +5,19 @@ public class DataFetchFirstState implements State {
     }
 
     @Override
-    public boolean fetchInstruction() {
-        return false;
+    public void fetchInstruction() {
     }
 
     @Override
-    public boolean parseInstruction() {
+    public void parseInstruction() {
         this.vscpuCore.setState(this.vscpuCore.getDataFetchSecondState());
-        return true;
     }
 
     @Override
-    public boolean getSecondData() {
-        return false;
+    public void getSecondData() {
     }
 
     @Override
-    public boolean executeInstruction() {
-        return false;
+    public void executeInstruction() {
     }
 }

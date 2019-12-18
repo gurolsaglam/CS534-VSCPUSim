@@ -25,32 +25,32 @@ public class VSCPUCore {
 
     }
 
-    public State getInstructionFetchState() {
+    protected State getInstructionFetchState() {
         return this.instructionFetchState;
     }
 
-    public State getDataFetchFirstState() {
+    protected State getDataFetchFirstState() {
         return this.dataFetchFirstState;
     }
 
-    public State getDataFetchSecondState() {
+    protected State getDataFetchSecondState() {
         return this.dataFetchSecondState;
     }
 
-    public State getExecuteState() {
+    protected State getExecuteState() {
         return this.executeState;
     }
 
-    public void setState(final State state) {
+    protected void setState(final State state) {
         this.state = state;
     }
 
-    public long getpCounter() {
+    protected long getpCounter() {
         this.state.fetchInstruction();
         return this.pCounter;
     }
 
-    public long parseInstruction(Instruction instruction) {
+    protected long parseInstruction(Instruction instruction) {
         this.state.parseInstruction();
         this.opCode = instruction.getOpCode();
         this.addressA = instruction.getAddressA();
@@ -61,7 +61,7 @@ public class VSCPUCore {
         return this.addressA;
     }
 
-    public long writeDataAndSendNextAddress(int data) {
+    protected long writeDataAndSendNextAddress(int data) {
         this.state.getSecondData();
         if (this.operatorMediator.isCPI(this.opCode)) {
             this.num2 = data;
@@ -72,7 +72,7 @@ public class VSCPUCore {
         }
     }
 
-    public long[] execute(int data) {
+    protected long[] execute(int data) {
         //Returns a three element array.
         //The first element is wrEn, can be 1 or 0.
         //The second is the address for the RAM,
