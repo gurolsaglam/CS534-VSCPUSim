@@ -6,7 +6,7 @@ public class VSCPU {
     public VSCPU(LineIterator iter1, LineIterator iter2) {
         rom =  new ROM(iter1);
         ram = new RAM(iter2);
-        vscpuCore = new VSCPUCore(); //TODO find a way to give opcodes to initialize operators or maybe Proxies will initialize operations anyway?
+        vscpuCore = new VSCPUCore();
     }
 
     //STRATEGY PATTERN IS HERE
@@ -41,6 +41,7 @@ public class VSCPU {
     }
 
     private boolean simulateLine() {
+        //TODO print initial memory and final memory
         long pCounter = this.vscpuCore.getpCounter();
         Instruction instruction = (Instruction) this.rom.getFrom(pCounter);
 

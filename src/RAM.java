@@ -16,7 +16,7 @@ public class RAM implements Memory{
             int data = Integer.parseInt(temp[1]);
             if (this.memory.size() <= address) {
                 for (int i = this.memory.size(); i < address; i++) {
-                    this.memory.add(0); //TODO NullObject or just 0?
+                    this.memory.add(0);
                 }
                 this.memory.add(data);
             } else {
