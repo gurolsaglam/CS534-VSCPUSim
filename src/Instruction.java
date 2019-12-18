@@ -1,7 +1,5 @@
-public class Instruction {
-    private final String opCode; //TODO: could be made enum
-    private final long addressA;
-    private final long addressB;
+public class Instruction extends InstrSet {
+
 
     public Instruction(String opCode, long addressA, long addressB) {
         this.opCode = opCode;
@@ -9,7 +7,7 @@ public class Instruction {
         this.addressB = addressB;
     }
 
-    final String getOpCode() {
+    public final String getOpCode() {
         return this.opCode;
     }
 

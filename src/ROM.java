@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 public class ROM{
-    private final ArrayList<Instruction> memory;
+    private final ArrayList<InstrSet> memory;
     private final ArrayList<String> opCodeList; //TODO maybe enum?
 
     public ROM(final LineIterator iterator) {
-        this.memory = new ArrayList<Instruction>();
+        this.memory = new ArrayList<InstrSet>();
         this.opCodeList = new ArrayList<String>();
         this.initializeMemory(iterator);
         this.initializeOpCodeList();
@@ -21,7 +21,7 @@ public class ROM{
             int addressB = Integer.parseInt(temp[3]);
             if (this.memory.size() <= address) {
                 for (int i = this.memory.size(); i < address; i++) {
-                    this.memory.add(null); //TODO NullObject inherited from Instruction?
+                    this.memory.add(new NullObject()); //TODO NullObject inherited from Instruction?
                 }
                 this.memory.add(new Instruction(opCode, addressA, addressB));
             } else {
@@ -31,7 +31,7 @@ public class ROM{
     }
 
     private void initializeOpCodeList() {
-        for (Instruction instruction : this.memory) {
+        for (InstrSet instruction : this.memory) {
             String opCode = instruction.getOpCode();
             if (!this.opCodeList.contains(opCode)) {
                 this.opCodeList.add(opCode);
