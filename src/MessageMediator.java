@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+
+//MEDIATOR PATTERN
 public class MessageMediator {
     private JComponent jComponent;
 
