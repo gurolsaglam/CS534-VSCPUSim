@@ -1,8 +1,8 @@
 //NULL OBJECT PATTERN implemented
 public class NullObject extends InstrSet {
 
-    public NullObject(){
-        this.opCode = "ADD";
+    public NullObject(String opCode){
+        this.opCode = opCode;
         this.addressA = 0;
         this.addressB = 0;
     }
