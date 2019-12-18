@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -29,7 +30,6 @@ public class Main {
         scanner2.close();
 
         VSCPU vscpu = new VSCPU(iter1, iter2);
-        //TODO simulation part
         Scanner scanner3 = new Scanner(System.in);
         while (true) {
             System.out.println("Enter sim type: ");
