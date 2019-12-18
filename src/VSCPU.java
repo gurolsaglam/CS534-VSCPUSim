@@ -1,12 +1,16 @@
+import javax.swing.*;
+
 public class VSCPU {
     private ROM rom;
     private RAM ram;
     private VSCPUCore vscpuCore;
+    private MessageMediator messageMediator;
 
-    public VSCPU(LineIterator iter1, LineIterator iter2) {
+    public VSCPU(LineIterator iter1, LineIterator iter2, JComponent jComponent) {
         rom =  new ROM(iter1);
         ram = new RAM(iter2);
         vscpuCore = new VSCPUCore();
+        messageMediator = new MessageMediator(jComponent);
     }
 
     //STRATEGY PATTERN IS HERE
@@ -18,7 +22,7 @@ public class VSCPU {
         }
     }
 
-    private boolean simulateAll() { //TODO return a string "memories" of simulation, and in simulate all, we need X amount of string returned to publish to gui? Or maybe allocate the JTextArea to this method but this removes M-V-C.
+    private boolean simulateAll() {
         while (true) {
             boolean isFinished = this.simulateLine();
             if (isFinished) {
@@ -28,13 +32,13 @@ public class VSCPU {
     }
 
     private boolean simulateLine() {
-        System.out.println(this.getStars());
+        String simLine = this.getStars() + "\n";
 
         long pCounter = this.vscpuCore.getpCounter();
         Instruction instruction = (Instruction) this.rom.getFrom(pCounter);
 
-        //print instruction
-        System.out.println(this.getInstruction(pCounter));
+        //get instruction
+        simLine = simLine + this.getInstruction(pCounter) + "\n";
 
         long address1 = this.vscpuCore.parseInstruction(instruction);
         int data = (int) this.ram.getFrom(address1);
@@ -42,27 +46,29 @@ public class VSCPU {
         long address2 = vscpuCore.writeDataAndSendNextAddress(data);
         data = (int) this.ram.getFrom(address2);
 
-        //print memory before execution
+        //get memory before execution
         if (!this.vscpuCore.isJump()) {
-            System.out.println(this.getMemory(true, address1, address2));
+            simLine = simLine + this.getMemory(true, address1, address2) + "\n";
         }
 
         long[] result = vscpuCore.execute(data);
         this.ram.setData((int) result[0], result[1], (int) result[2]);
 
-        //print memory after execution
+        //get memory after execution
         if (!this.vscpuCore.isJump()) {
-            System.out.println(this.getMemory(false, address1, address2));
+            simLine = simLine + this.getMemory(false, address1, address2) + "\n";
         }
 
-        System.out.println(this.getStars());
+        simLine = simLine + this.getStars() + "\n";
 
         if (result[0] == 0 && result[1] == Integer.MAX_VALUE && result[2] == Integer.MAX_VALUE) {
-            System.out.println(this.getStars());
-            System.out.println("The simulation has finished.");
-            System.out.println(this.getStars());
+            simLine = simLine + this.getStars() + "\n";
+            simLine = simLine + "The simulation has finished." + "\n";
+            simLine = simLine + this.getStars() + "\n";
+            this.messageMediator.sendMessage(simLine);
             return true;
         } else {
+            this.messageMediator.sendMessage(simLine);
             return false;
         }
     }

@@ -1,6 +1,6 @@
 
 public interface Memory {
-    Object getFrom(long address); //TODO can we change Object to Word like a superclass for data and instruction and null object?
+    Object getFrom(long address);
     private void initializeMemory(LineIterator iterator) {
 
     };

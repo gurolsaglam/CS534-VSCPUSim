@@ -28,7 +28,7 @@ public class Main {
         }
         scanner2.close();
 
-        VSCPU vscpu = new VSCPU(iter1, iter2);
+        VSCPU vscpu = new VSCPU(iter1, iter2, null);
         Scanner scanner3 = new Scanner(System.in);
         while (true) {
             System.out.println("Enter sim type: ");
